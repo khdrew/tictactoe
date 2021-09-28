@@ -1,15 +1,20 @@
-import './App.scss';
+import { Component } from 'react';
 import GameOptions from './GameOptions';
+import PlayArea from './PlayArea';
+import './App.scss';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        Tic-Tac-Toe
-      </header>
-      <GameOptions />
-    </div>
-  );
+export default class App extends Component {
+
+  render() {
+    return (
+      <div className="app">
+        <header className="app-header">
+          Tic-Tac-Toe
+        </header>
+        <GameOptions />
+        <PlayArea />
+      </div>
+    );
+  }
+
 }
-
-export default App;

@@ -1,0 +1,23 @@
+.options {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    .option {
+        width: 100px;
+        height: 100px;
+        margin: 15px;
+        input {
+            display: none;
+        }
+        .box {
+            border: 1px solid grey;
+            height: 100%;
+            width: 100%;
+            vertical-align: middle;
+            &.selected {
+                border: 2px solid red;
+                color: red;
+            }
+        }
+    }
+}
