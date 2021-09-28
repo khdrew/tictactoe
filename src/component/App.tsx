@@ -1,4 +1,5 @@
 import './App.scss';
+import GameOptions from './GameOptions';
 
 function App() {
   return (
@@ -6,6 +7,7 @@ function App() {
       <header className="App-header">
         Tic-Tac-Toe
       </header>
+      <GameOptions />
     </div>
   );
 }
