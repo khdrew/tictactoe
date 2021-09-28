@@ -1,27 +1,33 @@
 import { Component } from 'react';
+import { Options } from './App';
 import './GameOptions.scss';
 
-type AppState = {
-    firstPlayer: string;
+type AppProps = {
+    onOptionConfirmed: (o: Options) => void;
 }
-
-export default class GameOptions extends Component<{}, AppState> {
+export default class GameOptions extends Component<AppProps, Options> {
 
     private get firstPlayer(): string {
         return this.state.firstPlayer;
     }
+    private onOptionConfirmed: (o: Options) => void;
+
 
     readonly options: string[] = ['O', 'X'];
 
-    constructor(props: any) {
+    constructor(props: AppProps) {
         super(props);
         this.state = { firstPlayer: '' };
+
+        this.onOptionConfirmed = this.props.onOptionConfirmed;
+
     }
 
     onFirstPlayerChange: any = (e: any) => {
-        console.log(e);
-        this.setState({ ...this.state, firstPlayer: e.target.value })
-        console.log(this.firstPlayer);
+        const newState = { firstPlayer: e.target.value };
+        this.setState(() => newState, () => {
+            this.onOptionConfirmed(newState)
+        });
     }
 
     render() {
@@ -32,8 +38,8 @@ export default class GameOptions extends Component<{}, AppState> {
                     Select who goes first:
                 </div>
                 <div className="options">
-                    {this.options.map((op) => {
-                        return <label className="option">
+                    {this.options.map((op, i) => {
+                        return <label className="option" key={i.toString()}>
                             <input type="radio" name="firstPlayer" value={op} onChange={this.onFirstPlayerChange} />
                             <div className={`box ${this.firstPlayer === op ? 'selected' : ''}`}>{op}</div>
                         </label>
