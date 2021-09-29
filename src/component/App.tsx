@@ -4,14 +4,19 @@ import PlayArea from './PlayArea';
 import './App.scss';
 
 export type Options = {
-  startingPlayer: string;
+  startingPlayer: PlayerType;
+}
+export enum PlayerType {
+  X = 'X',
+  O = 'O',
+  NotPlayer = ''
 }
 export default class App extends Component<{}, Options> {
 
   constructor(props: any) {
     super(props);
     this.state = {
-      startingPlayer: ''
+      startingPlayer: PlayerType.NotPlayer
     };
     this.bindFunctions();
   }

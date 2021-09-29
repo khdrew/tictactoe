@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import { Options } from './App';
+import { Options, PlayerType } from './App';
 import './GameOptions.scss';
 
 type AppProps = {
@@ -7,17 +7,17 @@ type AppProps = {
 }
 export default class GameOptions extends Component<AppProps, Options> {
 
-    private get firstPlayer(): string {
+    private get firstPlayer(): PlayerType {
         return this.state.startingPlayer;
     }
     private onOptionConfirmed: (o: Options) => void;
 
 
-    readonly options: string[] = ['O', 'X'];
+    readonly options: PlayerType[] = [PlayerType.X, PlayerType.O];
 
     constructor(props: AppProps) {
         super(props);
-        this.state = { startingPlayer: '' };
+        this.state = { startingPlayer: PlayerType.NotPlayer };
 
         this.onOptionConfirmed = this.props.onOptionConfirmed;
     }
