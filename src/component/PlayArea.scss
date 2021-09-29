@@ -1,0 +1,18 @@
+.play-area {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.game-container {
+    display: grid;
+    grid-template-columns: repeat(3, 100px [col-start]);
+    grid-template-rows: repeat(3, 100px [col-start]);
+    grid-gap: 3px;
+    .box {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 2px solid black;
+    }
+}

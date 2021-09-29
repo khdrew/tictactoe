@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import { Options } from './App';
+import './PlayArea.scss';
 
 type Box = {
     selectedBy: string;
@@ -12,20 +13,28 @@ export default class PlayArea extends Component<{ options: Options }, GameVariab
 
     constructor(props: any) {
         super(props);
-        this.state = {
+        const initialState: GameVariables = {
             boxes: []
         };
         for (var i = 0; i < 9; i++) {
-            this.state.boxes.push({ selectedBy: '_'});
+            initialState.boxes.push({ selectedBy: '' });
         }
+        this.state = initialState;
+        this.setState(() => initialState);
     }
 
     render() {
         return (
-            <div className="game-container">
-                {this.state.boxes.map((box, i) => {
-                    <div className="box">{box.selectedBy}</div>
-                })}
+            <div className="play-area">
+                <div className="game-container">
+                    {this.state.boxes.map((box, i) => {
+                        return (
+                            <div className="box">
+                                {box.selectedBy}
+                            </div>
+                        )
+                    })}
+                </div>
             </div>
         );
     }

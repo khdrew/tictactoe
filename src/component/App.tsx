@@ -11,7 +11,7 @@ export default class App extends Component<{}, Options> {
   constructor(props: any) {
     super(props);
     this.state = {
-      firstPlayer: 'M'
+      firstPlayer: ''
     };
     this.bindFunctions();
   }
