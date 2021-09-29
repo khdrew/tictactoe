@@ -12,6 +12,18 @@ type GameVariables = {
     currentPlayer: PlayerType;
     startingPlayer: PlayerType;
     winner: PlayerType;
+    winPosition?: WinPos;
+}
+
+enum WinPos {
+    row0 = 'row-0',
+    row1 = 'row-1',
+    row2 = 'row-2',
+    col0 = 'col-0',
+    col1 = 'col-1',
+    col2 = 'col-2',
+    diagMaj = 'diag-maj',
+    diagMin = 'diag-min'
 }
 
 export default class PlayArea extends Component<{ options: Options }, GameVariables> {
@@ -62,22 +74,23 @@ export default class PlayArea extends Component<{ options: Options }, GameVariab
 
     checkGameOver(move: number) {
         const winningCombos = [
-            [0, 1, 2],
-            [3, 4, 5],
-            [6, 7, 8],
-            [0, 3, 6],
-            [1, 4, 7],
-            [2, 5, 8],
-            [0, 4, 8],
-            [6, 4, 2]
+            { condition: [0, 1, 2], pos: WinPos.row0 },
+            { condition: [3, 4, 5], pos: WinPos.row1 },
+            { condition: [6, 7, 8], pos: WinPos.row2 },
+            { condition: [0, 3, 6], pos: WinPos.col0 },
+            { condition: [1, 4, 7], pos: WinPos.col1 },
+            { condition: [2, 5, 8], pos: WinPos.col2 },
+            { condition: [0, 4, 8], pos: WinPos.diagMaj },
+            { condition: [2, 4, 6], pos: WinPos.diagMin }
         ];
         // get combo related to move
-        const relevantCombos = winningCombos.filter(combo => combo.includes(+move));
+        const relevantCombos = winningCombos.filter(combo => combo.condition.includes(+move));
 
         // check win
         const targetPlayer = this.state.boxes[move].selectedBy;
-        if (!!relevantCombos.find(combo => combo.filter(i => this.state.boxes[i].selectedBy === targetPlayer).length === 3)) {
-            this.setState({ ...this.state, winner: targetPlayer });
+        const winCondition = relevantCombos.find(combo => combo.condition.filter(i => this.state.boxes[i].selectedBy === targetPlayer).length === 3)
+        if (!!winCondition) {
+            this.setState({ ...this.state, winner: targetPlayer, winPosition: winCondition.pos });
         }
     }
 
@@ -108,13 +121,19 @@ export default class PlayArea extends Component<{ options: Options }, GameVariab
                     return (<div className="game-instruction">{instruction}</div>);
                 })()}
                 <div className="game-container">
-                    {this.state.boxes.map((box, i) => {
-                        return (
-                            <div key={box.id} id={i.toString()} className="box" onClick={this.onBoxClick}>
-                                {box.selectedBy}
-                            </div>
-                        )
-                    })}
+                    <div className="game-field">
+                        {this.state.boxes.map((box, i) => {
+                            return (
+                                <div key={box.id} id={i.toString()} className="box" onClick={this.onBoxClick}>
+                                    {box.selectedBy}
+                                </div>
+                            )
+                        })}
+                    </div>
+                    {(() => {
+                        if (this.state.winner === PlayerType.NotPlayer) { return; }
+                        return <span className={`win-strike ${this.state.winPosition}`}></span>
+                    })()}
                 </div>
                 <button className="btn btn-primary" onClick={this.onResetGame}>Reset Game</button>
             </div>

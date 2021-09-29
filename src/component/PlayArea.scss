@@ -7,15 +7,63 @@
 }
 
 .game-container {
-    display: grid;
-    grid-template-columns: repeat(3, 100px [col-start]);
-    grid-template-rows: repeat(3, 100px [col-start]);
-    grid-gap: 3px;
-    .box {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border: 2px solid black;
-        @include noselect;
+    display: flex;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    width: 309px;
+    height: 309px;
+    .game-field {
+        display: grid;
+        grid-template-columns: repeat(3, 100px [col-start]);
+        grid-template-rows: repeat(3, 100px [col-start]);
+        grid-gap: 3px;
+        .box {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 2px solid black;
+            @include noselect;
+        }
     }
+    .win-strike {
+        position: absolute;
+        width: 100%;
+        height: 2%;
+        background-color: red;
+        opacity: .75;
+        border-radius: 3px;
+        &.row-0 {
+            top: 16.67%;
+        }
+        &.row-1 {
+            top: 50%;
+        }
+        &.row-2 {
+            bottom: 16.67%
+        }
+        &.col-0 {
+            transform: rotate(90deg);
+            right: 33.33%;
+        }
+        &.col-1 {
+            transform: rotate(90deg);
+        }
+        &.col-2 {
+            transform: rotate(90deg);
+            left: 33.33%;
+        }
+        &.diag-maj {
+            width: 141.4%;
+            transform: rotate(45deg);
+        }
+        &.diag-min {
+            width: 141.4%;
+            transform: rotate(-45deg);
+        }
+    }
+}
+
+.btn-primary {
+    margin-top: 6px;
 }
