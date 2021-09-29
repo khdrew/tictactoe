@@ -1,19 +1,31 @@
 import { Component } from 'react';
 import { Options } from './App';
 
+type Box = {
+    selectedBy: string;
+}
 
-export default class PlayArea extends Component<{ options: Options }, Options> {
+type GameVariables = {
+    boxes: Box[];
+}
+export default class PlayArea extends Component<{ options: Options }, GameVariables> {
 
     constructor(props: any) {
         super(props);
-        this.state = this.props.options;
+        this.state = {
+            boxes: []
+        };
+        for (var i = 0; i < 9; i++) {
+            this.state.boxes.push({ selectedBy: '_'});
+        }
     }
 
     render() {
         return (
-            <div>
-                <div >PlayArea</div>
-                <div>{this.state.firstPlayer}</div>
+            <div className="game-container">
+                {this.state.boxes.map((box, i) => {
+                    <div className="box">{box.selectedBy}</div>
+                })}
             </div>
         );
     }

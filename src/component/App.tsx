@@ -13,13 +13,15 @@ export default class App extends Component<{}, Options> {
     this.state = {
       firstPlayer: 'M'
     };
+    this.bindFunctions();
   }
 
-  onOptionConfirmed(options: Options) {
-    console.log(this.state, options);
-    this.setState(() => options);
+  private bindFunctions() {
+    this.onOptionConfirmed = this.onOptionConfirmed.bind(this);
   }
-
+  onOptionConfirmed(options: Options): void {
+    this.setState(() => { return options; });
+  }
 
   render() {
     return (
@@ -28,7 +30,7 @@ export default class App extends Component<{}, Options> {
           Tic-Tac-Toe
         </header>
         <GameOptions onOptionConfirmed={this.onOptionConfirmed} />
-        <PlayArea options={ this.state } />
+        <PlayArea options={this.state} />
       </div>
     );
   }

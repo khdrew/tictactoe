@@ -15,6 +15,10 @@
             height: 100%;
             width: 100%;
             vertical-align: middle;
+            transition: 0.3s;
+            &:hover {
+                border: 2px solid grey;
+            }
             &.selected {
                 border: 2px solid red;
                 color: red;

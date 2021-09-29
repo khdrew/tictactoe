@@ -20,13 +20,12 @@ export default class GameOptions extends Component<AppProps, Options> {
         this.state = { firstPlayer: '' };
 
         this.onOptionConfirmed = this.props.onOptionConfirmed;
-
     }
 
     onFirstPlayerChange: any = (e: any) => {
         const newState = { firstPlayer: e.target.value };
         this.setState(() => newState, () => {
-            this.onOptionConfirmed(newState)
+            this.onOptionConfirmed(this.state)
         });
     }
 
