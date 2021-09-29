@@ -40,7 +40,7 @@ export default class GameOptions extends Component<AppProps, Options> {
                     {this.options.map((op, i) => {
                         return <label className={`option ${this.firstPlayer === op ? 'selected' : ''}`} key={i.toString()}>
                             <input type="radio" name="firstPlayer" value={op} onChange={this.onStartingPlayerChange} />
-                            <div className="box">{op}</div>
+                            <div className="option-label">{op}</div>
                         </label>
                     })}
                 </div>

@@ -40,7 +40,8 @@ export default class PlayArea extends Component<{ options: Options }, GameVariab
         return PlayArea.initState(props);
     }
 
-    onResetGame() {
+    onResetGame(e: any) {
+        e.preventDefault();
         this.setState(PlayArea.initState(this.props));
     }
 
@@ -84,7 +85,7 @@ export default class PlayArea extends Component<{ options: Options }, GameVariab
                         )
                     })}
                 </div>
-                <button onClick={this.onResetGame}>Reset Game</button>
+                <button className="btn btn-primary" onClick={this.onResetGame}>Reset Game</button>
             </div>
         );
     }
