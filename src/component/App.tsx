@@ -4,14 +4,14 @@ import PlayArea from './PlayArea';
 import './App.scss';
 
 export type Options = {
-  firstPlayer: string;
+  startingPlayer: string;
 }
 export default class App extends Component<{}, Options> {
 
   constructor(props: any) {
     super(props);
     this.state = {
-      firstPlayer: ''
+      startingPlayer: ''
     };
     this.bindFunctions();
   }

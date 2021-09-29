@@ -8,7 +8,7 @@ type AppProps = {
 export default class GameOptions extends Component<AppProps, Options> {
 
     private get firstPlayer(): string {
-        return this.state.firstPlayer;
+        return this.state.startingPlayer;
     }
     private onOptionConfirmed: (o: Options) => void;
 
@@ -17,13 +17,13 @@ export default class GameOptions extends Component<AppProps, Options> {
 
     constructor(props: AppProps) {
         super(props);
-        this.state = { firstPlayer: '' };
+        this.state = { startingPlayer: '' };
 
         this.onOptionConfirmed = this.props.onOptionConfirmed;
     }
 
-    onFirstPlayerChange: any = (e: any) => {
-        const newState = { firstPlayer: e.target.value };
+    onStartingPlayerChange: any = (e: any) => {
+        const newState = { startingPlayer: e.target.value };
         this.setState(() => newState, () => {
             this.onOptionConfirmed(this.state)
         });
@@ -38,9 +38,9 @@ export default class GameOptions extends Component<AppProps, Options> {
                 </div>
                 <div className="options">
                     {this.options.map((op, i) => {
-                        return <label className="option" key={i.toString()}>
-                            <input type="radio" name="firstPlayer" value={op} onChange={this.onFirstPlayerChange} />
-                            <div className={`box ${this.firstPlayer === op ? 'selected' : ''}`}>{op}</div>
+                        return <label className={`option ${this.firstPlayer === op ? 'selected' : ''}`} key={i.toString()}>
+                            <input type="radio" name="firstPlayer" value={op} onChange={this.onStartingPlayerChange} />
+                            <div className="box">{op}</div>
                         </label>
                     })}
                 </div>
