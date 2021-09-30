@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import { Options, PlayerType } from './App';
 import PlayArea from './PlayArea';
 
-test('renders title text', () => {
+test('renders prompt to select options', () => {
     const state: Options = {
         startingPlayer: PlayerType.NotPlayer
     };
