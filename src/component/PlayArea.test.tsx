@@ -1,10 +1,14 @@
 import { render, screen } from '@testing-library/react';
+import { Options, PlayerType } from './App';
 import PlayArea from './PlayArea';
 
 test('renders title text', () => {
-//   render(<PlayArea />);
-//   const content = screen.getByText(/Game Options/i);
-//   expect(content).toBeInTheDocument();
+    const state: Options = {
+        startingPlayer: PlayerType.NotPlayer
+    };
+    render(<PlayArea options={state} />);
+    const content = screen.getByText(/Select/i);
+    expect(content).toBeInTheDocument();
 });
 
 
